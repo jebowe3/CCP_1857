@@ -75,10 +75,10 @@
 
     /* Set the styles for the text span in the temporal legend */
     span.spanTxt {
-       display:block;
-       width:100%;
-       height: 100%;
-       margin: 0 auto;
+      display: block;
+      width: 100%;
+      height: 100%;
+      margin: 0 auto;
     }
 
     /* full size */
@@ -160,16 +160,43 @@
     };
     title.addTo(map);
 
+    // Define an empty layer control
+    var layerControl = L.control.layers(null, null, {
+      collapsed: true,
+    }).addTo(map); // Add it to the map
+
+    // Define an empty layer group to store time-dependent events
+    var events = L.layerGroup().addTo(map); // and add it to the map
+
+    // Add the "events" layer group to the layer control
+    layerControl.addOverlay(events, "Events");
+
     // Add a scale bar
     L.control.scale({
       position: 'bottomright' // Position the scale bar at the bottom-right corner
     }).addTo(map);
 
-    // Add base layers
-    //L.control.layers(null, null, {collapsed: false}).addTo(map);
-
-    // Fit to overlay bounds (SW and NE points with (lat, lon))
-    //map.fitBounds([[21.86437459575982, -62.261765267032715], [52.105573924000005, -132.616124525]]);
+    // Add a function to style the markers by name
+    function getColor(d) {
+      return d === "Alexander Clark" ? 'red' :
+        d === "Benjamin Mathews" ? 'blue' :
+        d === "Boling Bowser" ? 'purple' :
+        d === "Catherine Griffin Clark" ? 'yellow' :
+        d === "Daniel Anderson" ? 'brown' :
+        d === "Ellen Anderson nee Mathews" ? 'green' :
+        d === "George Manly" ? 'orange' :
+        d === "Hannah Virginia Mathews" ? 'orange-dark' :
+        d === "John Hiner" ? 'blue-dark' :
+        d === "Mahalia Sammons Motts" ? 'cyan' :
+        d === "Mahalia Sammons Motts Lindsey" ? 'cyan' :
+        d === "Mary A. Jeffers Cowan Hiner" ? 'violet' :
+        d === "Minerva A. Barkshire Tutt" ? 'pink' :
+        d === "Noah Tutt" ? 'green-dark' :
+        d === "Rebecca Darnes Clark Howard" ? 'white' :
+        d === "Susan V. Clark Holly" ? 'green-light' :
+        d === "Thomas Cook Motts" ? 'black' :
+        'blue';
+    };
 
     // use D3 fetch to request data with async requests
     const lifeData = d3.json('data/life_points_1857.geojson');
@@ -195,7 +222,7 @@
             icon: L.ExtraMarkers.icon({
               icon: 'far fa-user',
               prefix: 'fa',
-              markerColor: 'blue',
+              markerColor: getColor(feature.properties.Name),
               iconColor: 'white'
             })
           })
@@ -212,11 +239,11 @@
           layer.bindPopup("<h4 class=txt-bold>" + props.Name + ", " + props.location + ", " + props.range_date + "</h4><h5>Information:<br>" + props.info + "<br>Description:<br>" + props.description + "</h5>", {
             closeButton: false
           });
-          layer.on('mouseover', function() {
-            layer.openPopup();
+          layer.on('mouseover', function() { // On mouseover...
+            layer.openPopup(); // open the popup
           });
-          layer.on('mouseout', function() {
-            layer.closePopup();
+          layer.on('mouseout', function() { // On mouseout...
+            layer.closePopup(); // close the popup
           });
 
           // Define a variable for the property holding the starting year value
@@ -224,16 +251,15 @@
           // Define a variable for the property holding the ending year value
           var endYear = layer.feature.properties.end_date;
           // If the current year is greater than or equal to the starting year
-          // and the current year is less than or equal to the ending year...
+          // and less than or equal to the ending year...
           if (startYear <= currentYear && currentYear <= endYear) {
             // add the layer to the map
-            map.addLayer(layer)
-          } else {
-            // otherwise remove the layer
-            map.removeLayer(layer)
-          };
+            map.addLayer(layer);
+          } else { // otherwise...
+            layer.removeFrom(map); // remove it from the map
+          }
 
-        } // end onEachFeature
+        }, // end onEachFeature
 
       });
 
@@ -301,11 +327,11 @@
       // add the control to the map
       sliderControl.addTo(map);
 
-      $('.slider')
-        .on('input change', function() {
+      $('.slider') // select the slider
+        .on('input change', function() { // if any change is detected...
           var currentYear = $(this).val(); // identifies the year selected
-          createTemporalLegend(currentYear);
-          updateFeatures(lifePoints, currentYear);
+          createTemporalLegend(currentYear); // run this function
+          updateFeatures(lifePoints, currentYear); // run this function
         });
 
     }; // End sequenceUI function
@@ -313,6 +339,7 @@
     // Define updateFeatures function
     function updateFeatures(lifePoints, currentYear) {
 
+      // On each point...
       lifePoints.eachLayer(function(layer) {
 
         // Define a variable for the property holding the starting year value
@@ -320,15 +347,23 @@
         // Define a variable for the property holding the ending year value
         var endYear = layer.feature.properties.end_date;
         // If the current year is greater than or equal to the starting year
-        // and the current year is less than or equal to the ending year...
+        // and less than or equal to the ending year...
         if (startYear <= currentYear && currentYear <= endYear) {
-          // add the layer to the map
-          map.addLayer(layer)
-        } else {
-          // otherwise remove the layer
-          map.removeLayer(layer)
+          // add the layer to the layer group named "events"
+          events.addLayer(layer);
         };
 
+      });
+      // For each layer in the "events" layer group...
+      events.eachLayer(function (layer) {
+        var startYear = layer.feature.properties.start_date;
+        var endYear = layer.feature.properties.end_date;
+        // if the selected year is less than the start year or
+        // greater than the end year,
+        if (currentYear < startYear || currentYear > endYear){
+          // remove the layer from the "events" layer group
+    			events.removeLayer(layer)
+    		}
       });
 
     }; // End updateFeatures
