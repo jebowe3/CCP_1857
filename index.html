@@ -167,9 +167,13 @@
 
     // Define an empty layer group to store time-dependent events
     var events = L.layerGroup().addTo(map); // and add it to the map
+    var alexanderClark = L.layerGroup().addTo(map);
+    var benjaminMathews = L.layerGroup().addTo(map);
 
     // Add the "events" layer group to the layer control
     layerControl.addOverlay(events, "Events");
+    layerControl.addOverlay(alexanderClark, "Alexander Clark");
+    layerControl.addOverlay(benjaminMathews, "Benjamin Mathews");
 
     // Add a scale bar
     L.control.scale({
@@ -346,23 +350,47 @@
         var startYear = layer.feature.properties.start_date;
         // Define a variable for the property holding the ending year value
         var endYear = layer.feature.properties.end_date;
+        // Define a variable for the property holding the name value
+        var name = layer.feature.properties.Name;
         // If the current year is greater than or equal to the starting year
         // and less than or equal to the ending year...
         if (startYear <= currentYear && currentYear <= endYear) {
           // add the layer to the layer group named "events"
           events.addLayer(layer);
+          // if any of these have a name of...
+          if (name == "Alexander Clark") {
+            // add the layer to the appropriate layer group
+            alexanderClark.addLayer(layer);
+          } if (name == "Benjamin Mathews") {
+            benjaminMathews.addLayer(layer);
+          }
         };
 
       });
-      // For each layer in the "events" layer group...
+      // For each layer in the layer group...
       events.eachLayer(function (layer) {
         var startYear = layer.feature.properties.start_date;
         var endYear = layer.feature.properties.end_date;
         // if the selected year is less than the start year or
         // greater than the end year,
         if (currentYear < startYear || currentYear > endYear){
-          // remove the layer from the "events" layer group
+          // remove the layer from the layer group
     			events.removeLayer(layer)
+    		}
+      });
+      // Do the same for each person...
+      alexanderClark.eachLayer(function (layer) {
+        var startYear = layer.feature.properties.start_date;
+        var endYear = layer.feature.properties.end_date;
+        if (currentYear < startYear || currentYear > endYear){
+    			alexanderClark.removeLayer(layer)
+    		}
+      });
+      benjaminMathews.eachLayer(function (layer) {
+        var startYear = layer.feature.properties.start_date;
+        var endYear = layer.feature.properties.end_date;
+        if (currentYear < startYear || currentYear > endYear){
+    			benjaminMathews.removeLayer(layer)
     		}
       });
 
