@@ -156,7 +156,7 @@
       return this._div;
     };
     title.update = function(props) {
-      this._div.innerHTML = "USA_1857.tif";
+      this._div.innerHTML = "Map Title Goes Here";
     };
     title.addTo(map);
 
@@ -169,11 +169,39 @@
     var events = L.layerGroup().addTo(map); // and add it to the map
     var alexanderClark = L.layerGroup().addTo(map);
     var benjaminMathews = L.layerGroup().addTo(map);
+    var bolingBowser = L.layerGroup().addTo(map);
+    var catherineClark = L.layerGroup().addTo(map);
+    var danielAnderson = L.layerGroup().addTo(map);
+    var ellenAnderson = L.layerGroup().addTo(map);
+    var georgeManly = L.layerGroup().addTo(map);
+    var hannahMathews = L.layerGroup().addTo(map);
+    var johnHiner = L.layerGroup().addTo(map);
+    var mahaliaSammons = L.layerGroup().addTo(map);
+    var maryJeffers = L.layerGroup().addTo(map);
+    var minervaTutt = L.layerGroup().addTo(map);
+    var noahTutt = L.layerGroup().addTo(map);
+    var rebeccaDarnes = L.layerGroup().addTo(map);
+    var susanHolly = L.layerGroup().addTo(map);
+    var thomasMotts = L.layerGroup().addTo(map);
 
     // Add the "events" layer group to the layer control
-    layerControl.addOverlay(events, "Events");
+    layerControl.addOverlay(events, "All Life Events");
     layerControl.addOverlay(alexanderClark, "Alexander Clark");
     layerControl.addOverlay(benjaminMathews, "Benjamin Mathews");
+    layerControl.addOverlay(bolingBowser, "Boling Bowser");
+    layerControl.addOverlay(catherineClark, "Catherine Griffin Clark");
+    layerControl.addOverlay(danielAnderson, "Daniel Anderson");
+    layerControl.addOverlay(ellenAnderson, "Ellen Anderson nee Mathews");
+    layerControl.addOverlay(georgeManly, "George Manly");
+    layerControl.addOverlay(hannahMathews, "Hannah Virginia Mathews");
+    layerControl.addOverlay(johnHiner, "John Hiner");
+    layerControl.addOverlay(mahaliaSammons, "Mahalia Sammons Motts");
+    layerControl.addOverlay(maryJeffers, "Mary A. Jeffers Cowan Hiner");
+    layerControl.addOverlay(minervaTutt, "Minerva A. Barkshire Tutt");
+    layerControl.addOverlay(noahTutt, "Noah Tutt");
+    layerControl.addOverlay(rebeccaDarnes, "Rebecca Darnes Clark Howard");
+    layerControl.addOverlay(susanHolly, "Susan V. Clark Holly");
+    layerControl.addOverlay(thomasMotts, "Thomas Cook Motts");
 
     // Add a scale bar
     L.control.scale({
@@ -363,6 +391,34 @@
             alexanderClark.addLayer(layer);
           } if (name == "Benjamin Mathews") {
             benjaminMathews.addLayer(layer);
+          } if (name == "Boling Bowser") {
+            bolingBowser.addLayer(layer);
+          } if (name == "Catherine Griffin Clark") {
+            catherineClark.addLayer(layer);
+          } if (name == "Daniel Anderson") {
+            danielAnderson.addLayer(layer);
+          } if (name == "Ellen Anderson nee Mathews") {
+            ellenAnderson.addLayer(layer);
+          } if (name == "George Manly") {
+            georgeManly.addLayer(layer);
+          } if (name == "Hannah Virginia Mathews") {
+            hannahMathews.addLayer(layer);
+          } if (name == "John Hiner") {
+            johnHiner.addLayer(layer);
+          } if (name == "Mahalia Sammons Motts Lindsey" || name == "Mahalia Sammons Motts") {
+            mahaliaSammons.addLayer(layer);
+          } if (name == "Mary A. Jeffers Cowan Hiner") {
+            maryJeffers.addLayer(layer);
+          } if (name == "Minerva A. Barkshire Tutt") {
+            minervaTutt.addLayer(layer);
+          } if (name == "Noah Tutt") {
+            noahTutt.addLayer(layer);
+          } if (name == "Rebecca Darnes Clark Howard") {
+            rebeccaDarnes.addLayer(layer);
+          } if (name == "Susan V. Clark Holly") {
+            susanHolly.addLayer(layer);
+          } if (name == "Thomas Cook Motts") {
+            thomasMotts.addLayer(layer);
           }
         };
 
@@ -391,6 +447,104 @@
         var endYear = layer.feature.properties.end_date;
         if (currentYear < startYear || currentYear > endYear){
     			benjaminMathews.removeLayer(layer)
+    		}
+      });
+      bolingBowser.eachLayer(function (layer) {
+        var startYear = layer.feature.properties.start_date;
+        var endYear = layer.feature.properties.end_date;
+        if (currentYear < startYear || currentYear > endYear){
+    			bolingBowser.removeLayer(layer)
+    		}
+      });
+      catherineClark.eachLayer(function (layer) {
+        var startYear = layer.feature.properties.start_date;
+        var endYear = layer.feature.properties.end_date;
+        if (currentYear < startYear || currentYear > endYear){
+    			catherineClark.removeLayer(layer)
+    		}
+      });
+      danielAnderson.eachLayer(function (layer) {
+        var startYear = layer.feature.properties.start_date;
+        var endYear = layer.feature.properties.end_date;
+        if (currentYear < startYear || currentYear > endYear){
+    			danielAnderson.removeLayer(layer)
+    		}
+      });
+      ellenAnderson.eachLayer(function (layer) {
+        var startYear = layer.feature.properties.start_date;
+        var endYear = layer.feature.properties.end_date;
+        if (currentYear < startYear || currentYear > endYear){
+    			ellenAnderson.removeLayer(layer)
+    		}
+      });
+      georgeManly.eachLayer(function (layer) {
+        var startYear = layer.feature.properties.start_date;
+        var endYear = layer.feature.properties.end_date;
+        if (currentYear < startYear || currentYear > endYear){
+    			georgeManly.removeLayer(layer)
+    		}
+      });
+      hannahMathews.eachLayer(function (layer) {
+        var startYear = layer.feature.properties.start_date;
+        var endYear = layer.feature.properties.end_date;
+        if (currentYear < startYear || currentYear > endYear){
+    			hannahMathews.removeLayer(layer)
+    		}
+      });
+      johnHiner.eachLayer(function (layer) {
+        var startYear = layer.feature.properties.start_date;
+        var endYear = layer.feature.properties.end_date;
+        if (currentYear < startYear || currentYear > endYear){
+    			johnHiner.removeLayer(layer)
+    		}
+      });
+      mahaliaSammons.eachLayer(function (layer) {
+        var startYear = layer.feature.properties.start_date;
+        var endYear = layer.feature.properties.end_date;
+        if (currentYear < startYear || currentYear > endYear){
+    			mahaliaSammons.removeLayer(layer)
+    		}
+      });
+      maryJeffers.eachLayer(function (layer) {
+        var startYear = layer.feature.properties.start_date;
+        var endYear = layer.feature.properties.end_date;
+        if (currentYear < startYear || currentYear > endYear){
+    			maryJeffers.removeLayer(layer)
+    		}
+      });
+      minervaTutt.eachLayer(function (layer) {
+        var startYear = layer.feature.properties.start_date;
+        var endYear = layer.feature.properties.end_date;
+        if (currentYear < startYear || currentYear > endYear){
+    			minervaTutt.removeLayer(layer)
+    		}
+      });
+      noahTutt.eachLayer(function (layer) {
+        var startYear = layer.feature.properties.start_date;
+        var endYear = layer.feature.properties.end_date;
+        if (currentYear < startYear || currentYear > endYear){
+    			noahTutt.removeLayer(layer)
+    		}
+      });
+      rebeccaDarnes.eachLayer(function (layer) {
+        var startYear = layer.feature.properties.start_date;
+        var endYear = layer.feature.properties.end_date;
+        if (currentYear < startYear || currentYear > endYear){
+    			rebeccaDarnes.removeLayer(layer)
+    		}
+      });
+      susanHolly.eachLayer(function (layer) {
+        var startYear = layer.feature.properties.start_date;
+        var endYear = layer.feature.properties.end_date;
+        if (currentYear < startYear || currentYear > endYear){
+    			susanHolly.removeLayer(layer)
+    		}
+      });
+      thomasMotts.eachLayer(function (layer) {
+        var startYear = layer.feature.properties.start_date;
+        var endYear = layer.feature.properties.end_date;
+        if (currentYear < startYear || currentYear > endYear){
+    			thomasMotts.removeLayer(layer)
     		}
       });
 
