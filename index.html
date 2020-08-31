@@ -168,6 +168,9 @@
       collapsed: true,
     }).addTo(map); // Add it to the map
 
+    // Expand the layer countrol on opening
+    layerControl.expand();
+
     // Define empty layer groups to store time-dependent points
     var eventsPoint = L.layerGroup();
     var alexanderClarkPoint = L.layerGroup();
