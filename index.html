@@ -23,6 +23,9 @@
   <script src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
   <!-- for icon markers -->
   <script src="js/leaflet.extra-markers.min.js"></script>
+  <!-- for migration arrows -->
+  <script src="js/leaflet-geometryutil.js"></script>
+  <script src="js/leaflet-arrowheads.js"></script>
 
   <style>
     body {
@@ -165,24 +168,62 @@
       collapsed: true,
     }).addTo(map); // Add it to the map
 
-    // Define an empty layer group to store time-dependent events
-    var events = L.layerGroup().addTo(map); // and add it to the map
-    var alexanderClark = L.layerGroup().addTo(map);
-    var benjaminMathews = L.layerGroup().addTo(map);
-    var bolingBowser = L.layerGroup().addTo(map);
-    var catherineClark = L.layerGroup().addTo(map);
-    var danielAnderson = L.layerGroup().addTo(map);
-    var ellenAnderson = L.layerGroup().addTo(map);
-    var georgeManly = L.layerGroup().addTo(map);
-    var hannahMathews = L.layerGroup().addTo(map);
-    var johnHiner = L.layerGroup().addTo(map);
-    var mahaliaSammons = L.layerGroup().addTo(map);
-    var maryJeffers = L.layerGroup().addTo(map);
-    var minervaTutt = L.layerGroup().addTo(map);
-    var noahTutt = L.layerGroup().addTo(map);
-    var rebeccaDarnes = L.layerGroup().addTo(map);
-    var susanHolly = L.layerGroup().addTo(map);
-    var thomasMotts = L.layerGroup().addTo(map);
+    // Define empty layer groups to store time-dependent points
+    var eventsPoint = L.layerGroup();
+    var alexanderClarkPoint = L.layerGroup();
+    var benjaminMathewsPoint = L.layerGroup();
+    var bolingBowserPoint = L.layerGroup();
+    var catherineClarkPoint = L.layerGroup();
+    var danielAndersonPoint = L.layerGroup();
+    var ellenAndersonPoint = L.layerGroup();
+    var georgeManlyPoint = L.layerGroup();
+    var hannahMathewsPoint = L.layerGroup();
+    var johnHinerPoint = L.layerGroup();
+    var mahaliaSammonsPoint = L.layerGroup();
+    var maryJeffersPoint = L.layerGroup();
+    var minervaTuttPoint = L.layerGroup();
+    var noahTuttPoint = L.layerGroup();
+    var rebeccaDarnesPoint = L.layerGroup();
+    var susanHollyPoint = L.layerGroup();
+    var thomasMottsPoint = L.layerGroup();
+
+    // Define empty layer groups to store time-dependent arrows
+    var eventsArrow = L.layerGroup();
+    var alexanderClarkArrow = L.layerGroup();
+    var benjaminMathewsArrow = L.layerGroup();
+    var bolingBowserArrow = L.layerGroup();
+    var catherineClarkArrow = L.layerGroup();
+    var danielAndersonArrow = L.layerGroup();
+    var ellenAndersonArrow = L.layerGroup();
+    var georgeManlyArrow = L.layerGroup();
+    var hannahMathewsArrow = L.layerGroup();
+    var johnHinerArrow = L.layerGroup();
+    var mahaliaSammonsArrow = L.layerGroup();
+    var maryJeffersArrow = L.layerGroup();
+    var minervaTuttArrow = L.layerGroup();
+    var noahTuttArrow = L.layerGroup();
+    var rebeccaDarnesArrow = L.layerGroup();
+    var susanHollyArrow = L.layerGroup();
+    var thomasMottsArrow = L.layerGroup();
+
+    // Fill new layer groups with points and arrows for each person
+    var events = L.layerGroup([eventsPoint, eventsArrow]).addTo(map); // add to the map
+    var alexanderClark = L.layerGroup([alexanderClarkPoint, alexanderClarkArrow]);
+    var benjaminMathews = L.layerGroup([benjaminMathewsPoint, benjaminMathewsArrow]);
+    var bolingBowser = L.layerGroup([bolingBowserPoint, bolingBowserArrow]);
+    var catherineClark = L.layerGroup([catherineClarkPoint, catherineClarkArrow]);
+    var danielAnderson = L.layerGroup([danielAndersonPoint, danielAndersonArrow]);
+    var ellenAnderson = L.layerGroup([ellenAndersonPoint, ellenAndersonArrow]);
+    var georgeManly = L.layerGroup([georgeManlyPoint, georgeManlyArrow]);
+    var hannahMathews = L.layerGroup([hannahMathewsPoint, hannahMathewsArrow]);
+    var johnHiner = L.layerGroup([johnHinerPoint, johnHinerArrow]);
+    var mahaliaSammons = L.layerGroup([mahaliaSammonsPoint, mahaliaSammonsArrow]);
+    var maryJeffers = L.layerGroup([maryJeffersPoint, maryJeffersArrow]);
+    var minervaTutt = L.layerGroup([minervaTuttPoint, minervaTuttArrow]);
+    var noahTutt = L.layerGroup([noahTuttPoint, noahTuttArrow]);
+    var rebeccaDarnes = L.layerGroup([rebeccaDarnesPoint, rebeccaDarnesArrow]);
+    var susanHolly = L.layerGroup([susanHollyPoint, susanHollyArrow]);
+    var thomasMotts = L.layerGroup([thomasMottsPoint, thomasMottsArrow]);
 
     // Add the "events" layer group to the layer control
     layerControl.addOverlay(events, "All Life Events");
@@ -230,11 +271,19 @@
         'blue';
     };
 
+    // Add a function to style lines by freedom
+    function colorFree(d) {
+      return d === "yes" ? '#1E3A51' :
+        d === "no" ? '#800000' :
+        'blue';
+    };
+
     // use D3 fetch to request data with async requests
     const lifeData = d3.json('data/life_points_1857.geojson');
+    const migrationArrows = d3.json('data/flowmap_lines_1857.geojson');
 
     // use Promise to wait until data is all loaded
-    Promise.all([lifeData]).then(drawMap);
+    Promise.all([lifeData, migrationArrows]).then(drawMap);
 
     // function is called when Promise is fulfilled and data is ready
     function drawMap(data) {
@@ -244,6 +293,7 @@
 
       // pull out separate data arrays and assign to variables
       const lives = data[0];
+      const arrows = data[1];
 
       // create a layerGroup with the geojson data
       const lifePoints = L.geoJson(lives, {
@@ -295,7 +345,54 @@
 
       });
 
-      sequenceUI(lifePoints); // Produces the time slider and sends the layer to it
+      // create a layerGroup with the geojson data
+      const lifeArrows = L.geoJson(arrows, {
+        arrowheads: {
+          yawn: 40,
+          size: '10px',
+          frequency: 'endonly'
+        },
+        // Style the layer
+        style: function(feature) {
+          return {
+            color: colorFree(feature.properties.free),
+            weight: 2.5,
+            opacity: 0.75
+          };
+        },
+        // on each line...
+        onEachFeature: function(feature, layer) {
+          // define the layer feature properties
+          var props = layer.feature.properties;
+          // bind info to the layer features using popups
+          layer.bindTooltip(props.Name + ", " + props.year + "<hr>Traveled from " + props.s_city + " to " + props.e_city);
+          layer.on('mouseover', function() { // On mouseover...
+            // reset the line style
+            layer.setStyle({
+              color: 'yellow',
+              weight: 2.5,
+              opacity: 0.75
+            });
+          });
+          layer.on('mouseout', function() { // On mouseout...
+            // set it back to the original style
+            layer.setStyle({
+              color: colorFree(feature.properties.free),
+              weight: 2.5,
+              opacity: 0.75
+            });
+          });
+          // if the layer year is less than or equal to the time slider year...
+          if (feature.properties.year <= currentYear) {
+            // add the layer to the map
+            map.addLayer(layer);
+          } else { // otherwise...
+            layer.removeFrom(map); // remove it from the map
+          }
+        }
+      });
+
+      sequenceUI(lifePoints, lifeArrows); // Produces the time slider and sends the layers to it
       createTemporalLegend(currentYear); // Produces temporal legend upon map loading
 
     }; // end drawMap
@@ -328,7 +425,7 @@
     }; // End createTemporalLegend function
 
     // add a UI slider
-    function sequenceUI(lifePoints) {
+    function sequenceUI(lifePoints, lifeArrows) {
 
       // create Leaflet control for the slider
       var sliderControl = L.control({
@@ -363,17 +460,16 @@
         .on('input change', function() { // if any change is detected...
           var currentYear = $(this).val(); // identifies the year selected
           createTemporalLegend(currentYear); // run this function
-          updateFeatures(lifePoints, currentYear); // run this function
+          updateFeatures(lifePoints, lifeArrows, currentYear); // run this function
         });
 
     }; // End sequenceUI function
 
     // Define updateFeatures function
-    function updateFeatures(lifePoints, currentYear) {
+    function updateFeatures(lifePoints, lifeArrows, currentYear) {
 
       // On each point...
       lifePoints.eachLayer(function(layer) {
-
         // Define a variable for the property holding the starting year value
         var startYear = layer.feature.properties.start_date;
         // Define a variable for the property holding the ending year value
@@ -383,169 +479,338 @@
         // If the current year is greater than or equal to the starting year
         // and less than or equal to the ending year...
         if (startYear <= currentYear && currentYear <= endYear) {
-          // add the layer to the layer group named "events"
-          events.addLayer(layer);
+          // add the layer to the layer group named "eventsPoint"
+          eventsPoint.addLayer(layer);
           // if any of these have a name of...
           if (name == "Alexander Clark") {
             // add the layer to the appropriate layer group
-            alexanderClark.addLayer(layer);
-          } if (name == "Benjamin Mathews") {
-            benjaminMathews.addLayer(layer);
-          } if (name == "Boling Bowser") {
-            bolingBowser.addLayer(layer);
-          } if (name == "Catherine Griffin Clark") {
-            catherineClark.addLayer(layer);
-          } if (name == "Daniel Anderson") {
-            danielAnderson.addLayer(layer);
-          } if (name == "Ellen Anderson nee Mathews") {
-            ellenAnderson.addLayer(layer);
-          } if (name == "George Manly") {
-            georgeManly.addLayer(layer);
-          } if (name == "Hannah Virginia Mathews") {
-            hannahMathews.addLayer(layer);
-          } if (name == "John Hiner") {
-            johnHiner.addLayer(layer);
-          } if (name == "Mahalia Sammons Motts Lindsey" || name == "Mahalia Sammons Motts") {
-            mahaliaSammons.addLayer(layer);
-          } if (name == "Mary A. Jeffers Cowan Hiner") {
-            maryJeffers.addLayer(layer);
-          } if (name == "Minerva A. Barkshire Tutt") {
-            minervaTutt.addLayer(layer);
-          } if (name == "Noah Tutt") {
-            noahTutt.addLayer(layer);
-          } if (name == "Rebecca Darnes Clark Howard") {
-            rebeccaDarnes.addLayer(layer);
-          } if (name == "Susan V. Clark Holly") {
-            susanHolly.addLayer(layer);
-          } if (name == "Thomas Cook Motts") {
-            thomasMotts.addLayer(layer);
+            alexanderClarkPoint.addLayer(layer);
+          }
+          if (name == "Benjamin Mathews") {
+            benjaminMathewsPoint.addLayer(layer);
+          }
+          if (name == "Boling Bowser") {
+            bolingBowserPoint.addLayer(layer);
+          }
+          if (name == "Catherine Griffin Clark") {
+            catherineClarkPoint.addLayer(layer);
+          }
+          if (name == "Daniel Anderson") {
+            danielAndersonPoint.addLayer(layer);
+          }
+          if (name == "Ellen Anderson nee Mathews") {
+            ellenAndersonPoint.addLayer(layer);
+          }
+          if (name == "George Manly") {
+            georgeManlyPoint.addLayer(layer);
+          }
+          if (name == "Hannah Virginia Mathews") {
+            hannahMathewsPoint.addLayer(layer);
+          }
+          if (name == "John Hiner") {
+            johnHinerPoint.addLayer(layer);
+          }
+          if (name == "Mahalia Sammons Motts Lindsey" || name == "Mahalia Sammons Motts") {
+            mahaliaSammonsPoint.addLayer(layer);
+          }
+          if (name == "Mary A. Jeffers Cowan Hiner") {
+            maryJeffersPoint.addLayer(layer);
+          }
+          if (name == "Minerva A. Barkshire Tutt") {
+            minervaTuttPoint.addLayer(layer);
+          }
+          if (name == "Noah Tutt") {
+            noahTuttPoint.addLayer(layer);
+          }
+          if (name == "Rebecca Darnes Clark Howard") {
+            rebeccaDarnesPoint.addLayer(layer);
+          }
+          if (name == "Susan V. Clark Holly") {
+            susanHollyPoint.addLayer(layer);
+          }
+          if (name == "Thomas Cook Motts") {
+            thomasMottsPoint.addLayer(layer);
           }
         };
 
       });
+
       // For each layer in the layer group...
-      events.eachLayer(function (layer) {
+      eventsPoint.eachLayer(function(layer) {
         var startYear = layer.feature.properties.start_date;
         var endYear = layer.feature.properties.end_date;
         // if the selected year is less than the start year or
         // greater than the end year,
-        if (currentYear < startYear || currentYear > endYear){
+        if (currentYear < startYear || currentYear > endYear) {
           // remove the layer from the layer group
-    			events.removeLayer(layer)
-    		}
+          eventsPoint.removeLayer(layer)
+        }
       });
       // Do the same for each person...
-      alexanderClark.eachLayer(function (layer) {
+      alexanderClarkPoint.eachLayer(function(layer) {
         var startYear = layer.feature.properties.start_date;
         var endYear = layer.feature.properties.end_date;
-        if (currentYear < startYear || currentYear > endYear){
-    			alexanderClark.removeLayer(layer)
-    		}
+        if (currentYear < startYear || currentYear > endYear) {
+          alexanderClarkPoint.removeLayer(layer)
+        }
       });
-      benjaminMathews.eachLayer(function (layer) {
+      benjaminMathewsPoint.eachLayer(function(layer) {
         var startYear = layer.feature.properties.start_date;
         var endYear = layer.feature.properties.end_date;
-        if (currentYear < startYear || currentYear > endYear){
-    			benjaminMathews.removeLayer(layer)
-    		}
+        if (currentYear < startYear || currentYear > endYear) {
+          benjaminMathewsPoint.removeLayer(layer)
+        }
       });
-      bolingBowser.eachLayer(function (layer) {
+      bolingBowserPoint.eachLayer(function(layer) {
         var startYear = layer.feature.properties.start_date;
         var endYear = layer.feature.properties.end_date;
-        if (currentYear < startYear || currentYear > endYear){
-    			bolingBowser.removeLayer(layer)
-    		}
+        if (currentYear < startYear || currentYear > endYear) {
+          bolingBowserPoint.removeLayer(layer)
+        }
       });
-      catherineClark.eachLayer(function (layer) {
+      catherineClarkPoint.eachLayer(function(layer) {
         var startYear = layer.feature.properties.start_date;
         var endYear = layer.feature.properties.end_date;
-        if (currentYear < startYear || currentYear > endYear){
-    			catherineClark.removeLayer(layer)
-    		}
+        if (currentYear < startYear || currentYear > endYear) {
+          catherineClarkPoint.removeLayer(layer)
+        }
       });
-      danielAnderson.eachLayer(function (layer) {
+      danielAndersonPoint.eachLayer(function(layer) {
         var startYear = layer.feature.properties.start_date;
         var endYear = layer.feature.properties.end_date;
-        if (currentYear < startYear || currentYear > endYear){
-    			danielAnderson.removeLayer(layer)
-    		}
+        if (currentYear < startYear || currentYear > endYear) {
+          danielAndersonPoint.removeLayer(layer)
+        }
       });
-      ellenAnderson.eachLayer(function (layer) {
+      ellenAndersonPoint.eachLayer(function(layer) {
         var startYear = layer.feature.properties.start_date;
         var endYear = layer.feature.properties.end_date;
-        if (currentYear < startYear || currentYear > endYear){
-    			ellenAnderson.removeLayer(layer)
-    		}
+        if (currentYear < startYear || currentYear > endYear) {
+          ellenAndersonPoint.removeLayer(layer)
+        }
       });
-      georgeManly.eachLayer(function (layer) {
+      georgeManlyPoint.eachLayer(function(layer) {
         var startYear = layer.feature.properties.start_date;
         var endYear = layer.feature.properties.end_date;
-        if (currentYear < startYear || currentYear > endYear){
-    			georgeManly.removeLayer(layer)
-    		}
+        if (currentYear < startYear || currentYear > endYear) {
+          georgeManlyPoint.removeLayer(layer)
+        }
       });
-      hannahMathews.eachLayer(function (layer) {
+      hannahMathewsPoint.eachLayer(function(layer) {
         var startYear = layer.feature.properties.start_date;
         var endYear = layer.feature.properties.end_date;
-        if (currentYear < startYear || currentYear > endYear){
-    			hannahMathews.removeLayer(layer)
-    		}
+        if (currentYear < startYear || currentYear > endYear) {
+          hannahMathewsPoint.removeLayer(layer)
+        }
       });
-      johnHiner.eachLayer(function (layer) {
+      johnHinerPoint.eachLayer(function(layer) {
         var startYear = layer.feature.properties.start_date;
         var endYear = layer.feature.properties.end_date;
-        if (currentYear < startYear || currentYear > endYear){
-    			johnHiner.removeLayer(layer)
-    		}
+        if (currentYear < startYear || currentYear > endYear) {
+          johnHinerPoint.removeLayer(layer)
+        }
       });
-      mahaliaSammons.eachLayer(function (layer) {
+      mahaliaSammonsPoint.eachLayer(function(layer) {
         var startYear = layer.feature.properties.start_date;
         var endYear = layer.feature.properties.end_date;
-        if (currentYear < startYear || currentYear > endYear){
-    			mahaliaSammons.removeLayer(layer)
-    		}
+        if (currentYear < startYear || currentYear > endYear) {
+          mahaliaSammonsPoint.removeLayer(layer)
+        }
       });
-      maryJeffers.eachLayer(function (layer) {
+      maryJeffersPoint.eachLayer(function(layer) {
         var startYear = layer.feature.properties.start_date;
         var endYear = layer.feature.properties.end_date;
-        if (currentYear < startYear || currentYear > endYear){
-    			maryJeffers.removeLayer(layer)
-    		}
+        if (currentYear < startYear || currentYear > endYear) {
+          maryJeffersPoint.removeLayer(layer)
+        }
       });
-      minervaTutt.eachLayer(function (layer) {
+      minervaTuttPoint.eachLayer(function(layer) {
         var startYear = layer.feature.properties.start_date;
         var endYear = layer.feature.properties.end_date;
-        if (currentYear < startYear || currentYear > endYear){
-    			minervaTutt.removeLayer(layer)
-    		}
+        if (currentYear < startYear || currentYear > endYear) {
+          minervaTuttPoint.removeLayer(layer)
+        }
       });
-      noahTutt.eachLayer(function (layer) {
+      noahTuttPoint.eachLayer(function(layer) {
         var startYear = layer.feature.properties.start_date;
         var endYear = layer.feature.properties.end_date;
-        if (currentYear < startYear || currentYear > endYear){
-    			noahTutt.removeLayer(layer)
-    		}
+        if (currentYear < startYear || currentYear > endYear) {
+          noahTuttPoint.removeLayer(layer)
+        }
       });
-      rebeccaDarnes.eachLayer(function (layer) {
+      rebeccaDarnesPoint.eachLayer(function(layer) {
         var startYear = layer.feature.properties.start_date;
         var endYear = layer.feature.properties.end_date;
-        if (currentYear < startYear || currentYear > endYear){
-    			rebeccaDarnes.removeLayer(layer)
-    		}
+        if (currentYear < startYear || currentYear > endYear) {
+          rebeccaDarnesPoint.removeLayer(layer)
+        }
       });
-      susanHolly.eachLayer(function (layer) {
+      susanHollyPoint.eachLayer(function(layer) {
         var startYear = layer.feature.properties.start_date;
         var endYear = layer.feature.properties.end_date;
-        if (currentYear < startYear || currentYear > endYear){
-    			susanHolly.removeLayer(layer)
-    		}
+        if (currentYear < startYear || currentYear > endYear) {
+          susanHollyPoint.removeLayer(layer)
+        }
       });
-      thomasMotts.eachLayer(function (layer) {
+      thomasMottsPoint.eachLayer(function(layer) {
         var startYear = layer.feature.properties.start_date;
         var endYear = layer.feature.properties.end_date;
-        if (currentYear < startYear || currentYear > endYear){
-    			thomasMotts.removeLayer(layer)
-    		}
+        if (currentYear < startYear || currentYear > endYear) {
+          thomasMottsPoint.removeLayer(layer)
+        }
+      });
+
+      // On each arrow...
+      lifeArrows.eachLayer(function(layer) {
+        // Define a variable for the property holding the year value
+        var year = layer.feature.properties.year;
+        // Define a variable for the property holding the name value
+        var name = layer.feature.properties.Name;
+        // If the year is less than or equal to currentYear
+        if (year <= currentYear) {
+          // add the layer to the layer group named "eventsArrow"
+          eventsArrow.addLayer(layer);
+          // if any of these have a name of...
+          if (name == "Alexander Clark") {
+            // add the layer to the appropriate layer group
+            alexanderClarkArrow.addLayer(layer);
+          }
+          if (name == "Benjamin Mathews") {
+            benjaminMathewsArrow.addLayer(layer);
+          }
+          if (name == "Boling Bowser") {
+            bolingBowserArrow.addLayer(layer);
+          }
+          if (name == "Catherine Griffin Clark") {
+            catherineClarkArrow.addLayer(layer);
+          }
+          if (name == "Daniel Anderson") {
+            danielAndersonArrow.addLayer(layer);
+          }
+          if (name == "Ellen Anderson nee Mathews") {
+            ellenAndersonArrow.addLayer(layer);
+          }
+          if (name == "George Manly") {
+            georgeManlyArrow.addLayer(layer);
+          }
+          if (name == "Hannah Virginia Mathews") {
+            hannahMathewsArrow.addLayer(layer);
+          }
+          if (name == "John Hiner") {
+            johnHinerArrow.addLayer(layer);
+          }
+          if (name == "Mahalia Sammons Motts Lindsey" || name == "Mahalia Sammons Motts") {
+            mahaliaSammonsArrow.addLayer(layer);
+          }
+          if (name == "Mary A. Jeffers Cowan Hiner") {
+            maryJeffersArrow.addLayer(layer);
+          }
+          if (name == "Minerva A. Barkshire Tutt") {
+            minervaTuttArrow.addLayer(layer);
+          }
+          if (name == "Noah Tutt") {
+            noahTuttArrow.addLayer(layer);
+          }
+          if (name == "Rebecca Darnes Clark Howard") {
+            rebeccaDarnesArrow.addLayer(layer);
+          }
+          if (name == "Susan V. Clark Holly") {
+            susanHollyArrow.addLayer(layer);
+          }
+          if (name == "Thomas Cook Motts") {
+            thomasMottsArrow.addLayer(layer);
+          }
+        };
+      });
+
+      // For each layer in the layer group...
+      eventsArrow.eachLayer(function(layer) {
+        // if the layer year is greater than the time slider year...
+        if (layer.feature.properties.year > currentYear) {
+          // remove the layer from the layer group
+          eventsArrow.removeLayer(layer)
+        }
+      });
+      // Do the same for each person...
+      alexanderClarkArrow.eachLayer(function(layer) {
+        if (layer.feature.properties.year > currentYear) {
+          alexanderClarkArrow.removeLayer(layer)
+        }
+      });
+      benjaminMathewsArrow.eachLayer(function(layer) {
+        if (layer.feature.properties.year > currentYear) {
+          benjaminMathewsArrow.removeLayer(layer)
+        }
+      });
+      bolingBowserArrow.eachLayer(function(layer) {
+        if (layer.feature.properties.year > currentYear) {
+          bolingBowserArrow.removeLayer(layer)
+        }
+      });
+      catherineClarkArrow.eachLayer(function(layer) {
+        if (layer.feature.properties.year > currentYear) {
+          catherineClarkArrow.removeLayer(layer)
+        }
+      });
+      danielAndersonArrow.eachLayer(function(layer) {
+        if (layer.feature.properties.year > currentYear) {
+          danielAndersonArrow.removeLayer(layer)
+        }
+      });
+      ellenAndersonArrow.eachLayer(function(layer) {
+        if (layer.feature.properties.year > currentYear) {
+          ellenAndersonArrow.removeLayer(layer)
+        }
+      });
+      georgeManlyArrow.eachLayer(function(layer) {
+        if (layer.feature.properties.year > currentYear) {
+          georgeManlyArrow.removeLayer(layer)
+        }
+      });
+      hannahMathewsArrow.eachLayer(function(layer) {
+        if (layer.feature.properties.year > currentYear) {
+          hannahMathewsArrow.removeLayer(layer)
+        }
+      });
+      johnHinerArrow.eachLayer(function(layer) {
+        if (layer.feature.properties.year > currentYear) {
+          johnHinerArrow.removeLayer(layer)
+        }
+      });
+      mahaliaSammonsArrow.eachLayer(function(layer) {
+        if (layer.feature.properties.year > currentYear) {
+          mahaliaSammonsArrow.removeLayer(layer)
+        }
+      });
+      maryJeffersArrow.eachLayer(function(layer) {
+        if (layer.feature.properties.year > currentYear) {
+          maryJeffersArrow.removeLayer(layer)
+        }
+      });
+      minervaTuttArrow.eachLayer(function(layer) {
+        if (layer.feature.properties.year > currentYear) {
+          minervaTuttArrow.removeLayer(layer)
+        }
+      });
+      noahTuttArrow.eachLayer(function(layer) {
+        if (layer.feature.properties.year > currentYear) {
+          noahTuttArrow.removeLayer(layer)
+        }
+      });
+      rebeccaDarnesArrow.eachLayer(function(layer) {
+        if (layer.feature.properties.year > currentYear) {
+          rebeccaDarnesArrow.removeLayer(layer)
+        }
+      });
+      susanHollyArrow.eachLayer(function(layer) {
+        if (layer.feature.properties.year > currentYear) {
+          susanHollyArrow.removeLayer(layer)
+        }
+      });
+      thomasMottsArrow.eachLayer(function(layer) {
+        if (layer.feature.properties.year > currentYear) {
+          thomasMottsArrow.removeLayer(layer)
+        }
       });
 
     }; // End updateFeatures
