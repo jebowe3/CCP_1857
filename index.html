@@ -113,7 +113,7 @@
   <!-- ui slider -->
   <div id='slider' class='leaflet-control'>
     <!-- Use the first and last year of the time data as the min and max. Set the initial value as the first year. Set the steps at one year. -->
-    <input type='range' min="1791" max="1925" value="1791" step="1" class="slider" />
+    <input type='range' min="1790" max="1925" value="1790" step="1" class="slider" />
   </div>
   <!-- end slider -->
 
@@ -332,6 +332,7 @@
           var startYear = layer.feature.properties.start_date;
           // Define a variable for the property holding the ending year value
           var endYear = layer.feature.properties.end_date;
+/*
           // If the current year is greater than or equal to the starting year
           // and less than or equal to the ending year...
           if (startYear <= currentYear && currentYear <= endYear) {
@@ -340,7 +341,7 @@
           } else { // otherwise...
             layer.removeFrom(map); // remove it from the map
           }
-
+*/
         }, // end onEachFeature
 
       });
@@ -382,6 +383,7 @@
               opacity: 0.75
             });
           });
+/*
           // if the layer year is less than or equal to the time slider year...
           if (feature.properties.year <= currentYear) {
             // add the layer to the map
@@ -389,6 +391,7 @@
           } else { // otherwise...
             layer.removeFrom(map); // remove it from the map
           }
+*/
         }
       });
 
