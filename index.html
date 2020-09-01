@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' />
-  <title>USA_1857.tif</title>
+  <title>1857 CCP Map</title>
 
   <!-- CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.6.0/leaflet.css" />
@@ -113,7 +113,7 @@
   <!-- ui slider -->
   <div id='slider' class='leaflet-control'>
     <!-- Use the first and last year of the time data as the min and max. Set the initial value as the first year. Set the steps at one year. -->
-    <input type='range' min="1790" max="1925" value="1790" step="1" class="slider" />
+    <input type='range' min="1791" max="1925" value="1791" step="1" class="slider" />
   </div>
   <!-- end slider -->
 
@@ -159,7 +159,7 @@
       return this._div;
     };
     title.update = function(props) {
-      this._div.innerHTML = "Map Title Goes Here";
+      this._div.innerHTML = "1857 CCP Map";
     };
     title.addTo(map);
 
@@ -335,18 +335,15 @@
           var startYear = layer.feature.properties.start_date;
           // Define a variable for the property holding the ending year value
           var endYear = layer.feature.properties.end_date;
-/*
           // If the current year is greater than or equal to the starting year
           // and less than or equal to the ending year...
           if (startYear <= currentYear && currentYear <= endYear) {
-            // add the layer to the map
-            map.addLayer(layer);
+            // add the layer to the layer group
+            eventsPoint.addLayer(layer);;
           } else { // otherwise...
-            layer.removeFrom(map); // remove it from the map
+            eventsPoint.removeLayer(layer); // remove it from the layer group
           }
-*/
-        }, // end onEachFeature
-
+        } // end onEachFeature
       });
 
       // create a layerGroup with the geojson data
@@ -386,16 +383,14 @@
               opacity: 0.75
             });
           });
-/*
           // if the layer year is less than or equal to the time slider year...
           if (feature.properties.year <= currentYear) {
-            // add the layer to the map
-            map.addLayer(layer);
+            // add the layer to the layer group
+            eventsArrow.addLayer(layer);
           } else { // otherwise...
-            layer.removeFrom(map); // remove it from the map
+            eventsArrow.removeLayer(layer); // remove it from the layer group
           }
-*/
-        }
+        } // end onEachFeature
       });
 
       sequenceUI(lifePoints, lifeArrows); // Produces the time slider and sends the layers to it
