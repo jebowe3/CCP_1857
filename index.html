@@ -335,13 +335,84 @@
           var startYear = layer.feature.properties.start_date;
           // Define a variable for the property holding the ending year value
           var endYear = layer.feature.properties.end_date;
+          // Define a variable for the property holding the name
+          var name = layer.feature.properties.Name;
           // If the current year is greater than or equal to the starting year
           // and less than or equal to the ending year...
           if (startYear <= currentYear && currentYear <= endYear) {
             // add the layer to the layer group
-            eventsPoint.addLayer(layer);;
-          } else { // otherwise...
-            eventsPoint.removeLayer(layer); // remove it from the layer group
+            eventsPoint.addLayer(layer);
+            // if any of these have a name of...
+            if (name == "Alexander Clark") {
+              // add the layer to the appropriate layer group
+              alexanderClarkPoint.addLayer(layer);
+            }
+            if (name == "Benjamin Mathews") {
+              benjaminMathewsPoint.addLayer(layer);
+            }
+            if (name == "Boling Bowser") {
+              bolingBowserPoint.addLayer(layer);
+            }
+            if (name == "Catherine Griffin Clark") {
+              catherineClarkPoint.addLayer(layer);
+            }
+            if (name == "Daniel Anderson") {
+              danielAndersonPoint.addLayer(layer);
+            }
+            if (name == "Ellen Anderson nee Mathews") {
+              ellenAndersonPoint.addLayer(layer);
+            }
+            if (name == "George Manly") {
+              georgeManlyPoint.addLayer(layer);
+            }
+            if (name == "Hannah Virginia Mathews") {
+              hannahMathewsPoint.addLayer(layer);
+            }
+            if (name == "John Hiner") {
+              johnHinerPoint.addLayer(layer);
+            }
+            if (name == "Mahalia Sammons Motts Lindsey" || name == "Mahalia Sammons Motts") {
+              mahaliaSammonsPoint.addLayer(layer);
+            }
+            if (name == "Mary A. Jeffers Cowan Hiner") {
+              maryJeffersPoint.addLayer(layer);
+            }
+            if (name == "Minerva A. Barkshire Tutt") {
+              minervaTuttPoint.addLayer(layer);
+            }
+            if (name == "Noah Tutt") {
+              noahTuttPoint.addLayer(layer);
+            }
+            if (name == "Rebecca Darnes Clark Howard") {
+              rebeccaDarnesPoint.addLayer(layer);
+            }
+            if (name == "Susan V. Clark Holly") {
+              susanHollyPoint.addLayer(layer);
+            }
+            if (name == "Thomas Cook Motts") {
+              thomasMottsPoint.addLayer(layer);
+            }
+          } // if the selected year is less than the start year or
+          // greater than the end year,
+          if (currentYear < startYear || currentYear > endYear) {
+            // remove the layer from the layer group
+            eventsPoint.removeLayer(layer);
+            alexanderClarkPoint.removeLayer(layer);
+            benjaminMathewsPoint.removeLayer(layer);
+            bolingBowserPoint.removeLayer(layer);
+            catherineClarkPoint.removeLayer(layer);
+            danielAndersonPoint.removeLayer(layer);
+            ellenAndersonPoint.removeLayer(layer);
+            georgeManlyPoint.removeLayer(layer);
+            hannahMathewsPoint.removeLayer(layer);
+            johnHinerPoint.removeLayer(layer);
+            mahaliaSammonsPoint.removeLayer(layer);
+            maryJeffersPoint.removeLayer(layer);
+            minervaTuttPoint.removeLayer(layer);
+            noahTuttPoint.removeLayer(layer);
+            rebeccaDarnesPoint.removeLayer(layer);
+            susanHollyPoint.removeLayer(layer);
+            thomasMottsPoint.removeLayer(layer);
           }
         } // end onEachFeature
       });
@@ -383,12 +454,80 @@
               opacity: 0.75
             });
           });
+          // Define a variable for the property holding the name
+          var name = feature.properties.Name;
           // if the layer year is less than or equal to the time slider year...
           if (feature.properties.year <= currentYear) {
             // add the layer to the layer group
             eventsArrow.addLayer(layer);
-          } else { // otherwise...
+            // if any of these have a name of...
+            if (name == "Alexander Clark") {
+              // add the layer to the appropriate layer group
+              alexanderClarkArrow.addLayer(layer);
+            }
+            if (name == "Benjamin Mathews") {
+              benjaminMathewsArrow.addLayer(layer);
+            }
+            if (name == "Boling Bowser") {
+              bolingBowserArrow.addLayer(layer);
+            }
+            if (name == "Catherine Griffin Clark") {
+              catherineClarkArrow.addLayer(layer);
+            }
+            if (name == "Daniel Anderson") {
+              danielAndersonArrow.addLayer(layer);
+            }
+            if (name == "Ellen Anderson nee Mathews") {
+              ellenAndersonArrow.addLayer(layer);
+            }
+            if (name == "George Manly") {
+              georgeManlyArrow.addLayer(layer);
+            }
+            if (name == "Hannah Virginia Mathews") {
+              hannahMathewsArrow.addLayer(layer);
+            }
+            if (name == "John Hiner") {
+              johnHinerArrow.addLayer(layer);
+            }
+            if (name == "Mahalia Sammons Motts Lindsey" || name == "Mahalia Sammons Motts") {
+              mahaliaSammonsArrow.addLayer(layer);
+            }
+            if (name == "Mary A. Jeffers Cowan Hiner") {
+              maryJeffersArrow.addLayer(layer);
+            }
+            if (name == "Minerva A. Barkshire Tutt") {
+              minervaTuttArrow.addLayer(layer);
+            }
+            if (name == "Noah Tutt") {
+              noahTuttArrow.addLayer(layer);
+            }
+            if (name == "Rebecca Darnes Clark Howard") {
+              rebeccaDarnesArrow.addLayer(layer);
+            }
+            if (name == "Susan V. Clark Holly") {
+              susanHollyArrow.addLayer(layer);
+            }
+            if (name == "Thomas Cook Motts") {
+              thomasMottsArrow.addLayer(layer);
+            }
+          } if (feature.properties.year > currentYear) { // otherwise...
             eventsArrow.removeLayer(layer); // remove it from the layer group
+            alexanderClarkArrow.removeLayer(layer);
+            benjaminMathewsArrow.removeLayer(layer);
+            bolingBowserArrow.removeLayer(layer);
+            catherineClarkArrow.removeLayer(layer);
+            danielAndersonArrow.removeLayer(layer);
+            ellenAndersonArrow.removeLayer(layer);
+            georgeManlyArrow.removeLayer(layer);
+            hannahMathewsArrow.removeLayer(layer);
+            johnHinerArrow.removeLayer(layer);
+            mahaliaSammonsArrow.removeLayer(layer);
+            maryJeffersArrow.removeLayer(layer);
+            minervaTuttArrow.removeLayer(layer);
+            noahTuttArrow.removeLayer(layer);
+            rebeccaDarnesArrow.removeLayer(layer);
+            susanHollyArrow.removeLayer(layer);
+            thomasMottsArrow.removeLayer(layer);
           }
         } // end onEachFeature
       });
