@@ -165,7 +165,7 @@
   <!-- ui slider -->
   <div id='slider' class='leaflet-control'>
     <!-- Use the first and last year of the time data as the min and max. Set the initial value as the first year. Set the steps at one year. -->
-    <input type='range' min="1791" max="1925" value="1791" step="1" class="slider" />
+    <input type="range" min="1791" max="1925" value="1791" step="1" class="slider" />
   </div>
   <!-- end slider -->
 
@@ -359,14 +359,6 @@
 
       // define the year input form
       var timeForm = document.getElementById('form');
-
-      // if a year is submitted on timeForm...
-      timeForm.addEventListener('submit', function updateTimeRange (e) {
-        location.reload(); // reload the map
-        var timeSelect = document.getElementById('year').value; // define the submitted year
-        var currentYear = $('.slider').val(timeSelect); // redefine currentYear as the submitted year
-        e.preventDefault(); // prevent defaulting to 1791
-      });
 
       // pull out separate data arrays and assign to variables
       const lives = data[0];
@@ -607,7 +599,7 @@
         } // end onEachFeature
       });
 
-      sequenceUI(lifePoints, lifeArrows); // Produces the time slider and sends the layers to it
+      sequenceUI(lifePoints, lifeArrows, timeForm); // Produces the time slider and sends the layers to it
       createTemporalLegend(currentYear); // Produces temporal legend upon map loading
       drawLegend();
     }; // end drawMap
@@ -640,7 +632,7 @@
     }; // End createTemporalLegend function
 
     // add a UI slider
-    function sequenceUI(lifePoints, lifeArrows) {
+    function sequenceUI(lifePoints, lifeArrows, timeForm) {
 
       // create Leaflet control for the slider
       var sliderControl = L.control({
@@ -670,6 +662,15 @@
 
       // add the control to the map
       sliderControl.addTo(map);
+
+      // if a year is submitted on timeForm...
+      timeForm.addEventListener('submit', function updateTimeRange(e) {
+        var currentYear = document.getElementById('year').value; // define currentYear as the submitted year
+        $('.slider').val(currentYear); // adjust the time slider to the submitted year
+        createTemporalLegend(currentYear); // run this function
+        updateFeatures(lifePoints, lifeArrows, currentYear); // run this function
+        e.preventDefault(); // prevent defaulting to 1791
+      });
 
       $('.slider') // select the slider
         .on('input change', function() { // if any change is detected...
