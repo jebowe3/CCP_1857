@@ -394,17 +394,45 @@
         'blue';
     };
 
+    // Add a function to style the lines by name
+    function getLineColor(d) {
+      return d === "Alexander Clark" ? '#940414' :
+        d === "Benjamin Mathews" ? '#1c3ca4' :
+        d === "Boling Bowser" ? '#3c1c44' :
+        d === "Catherine Griffin Clark" ? '#fca404' :
+        d === "Daniel Anderson" ? '#ac0418' :
+        d === "Ellen Anderson nee Mathews" ? '#047c2c' :
+        d === "George Manly" ? '#fc6c04' :
+        d === "Hannah Virginia Mathews" ? '#dc0404' :
+        d === "John Hiner" ? '#043c44' :
+        d === "Mahalia Sammons Motts" ? '#048cd4' :
+        d === "Mahalia Sammons Motts Lindsey" ? '#048cd4' :
+        d === "Mary A. Jeffers Cowan Hiner" ? '#7c046c' :
+        d === "Minerva A. Barkshire Tutt" ? '#BF0080' :
+        d === "Noah Tutt" ? '#004223' :
+        d === "Rebecca Darnes Clark Howard" ? '#D7D6D6' :
+        d === "Susan V. Clark Holly" ? '#00A32B' :
+        d === "Thomas Cook Motts" ? '#1E1A1A' :
+        'blue';
+    };
+
     // Add a function to style lines by freedom
     function colorFree(d) {
       return d === "yes" ? '#1E3A51' :
-        d === "no" ? '#800000' :
-        'blue';
+             d === "no" ? '#800000' :
+             'blue';
     };
 
     function getDash(d) {
       return d === "yes" ? '0, 0' :
-      d === "no" ? '2, 5' :
-      '0, 0';
+             d === "no" ? '1, 7' :
+             '0, 0';
+    };
+
+    function getIcon(d) {
+      return d === "male" ? '<img src="img/man.png" width="17" height="17" style="vertical-align:bottom; position: relative; right:0px; bottom:-5px">' :
+             d === "female" ? '<img src="img/woman.png" width="20" height="20" style="vertical-align:bottom; position: relative; right:0px; bottom:-5px">' :
+             '<img src="img/woman.png" width="17" height="17" style="vertical-align:bottom; position: relative; right:0px; bottom:-5px">';
     };
 
     // use D3 fetch to request data with async requests
@@ -434,10 +462,11 @@
 
           return L.marker(ll, {
             icon: L.ExtraMarkers.icon({
-              icon: 'far fa-user',
-              prefix: 'fa',
+              //icon: 'far fa-user',
+              //prefix: 'fa',
               markerColor: getColor(feature.properties.Name),
-              iconColor: 'white'
+              innerHTML: getIcon(feature.properties.sex), // overrides icon with selected image
+              //iconColor: 'white'
             })
           })
 
@@ -556,7 +585,7 @@
         // Style the layer
         style: function(feature) {
           return {
-            color: colorFree(feature.properties.free),
+            color: getLineColor(feature.properties.Name),
             dashArray: getDash(feature.properties.free),
             weight: 5.0,
             opacity: 0.75
@@ -579,7 +608,7 @@
           layer.on('mouseout', function() { // On mouseout...
             // set it back to the original style
             layer.setStyle({
-              color: colorFree(feature.properties.free),
+              color: getLineColor(feature.properties.Name),
               weight: 5.0,
               opacity: 0.75
             });
@@ -1126,7 +1155,7 @@
 */
         function getLine(d) {
           return d === "Emancipated" ? '<i class="line" style="border-top: solid #1E3A51"></i> ' :
-          d === "Enslaved" ? '<i class="line" style="border-top: dotted #800000"></i> ' :
+          d === "Enslaved" ? '<i class="line" style="border-top: dotted #1E3A51"></i> ' :
           '<i class="line" style="background:#1E3A51"></i> ';
         };
 
