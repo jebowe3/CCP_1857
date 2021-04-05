@@ -497,7 +497,8 @@
           var name = layer.feature.properties.Name;
           // If the current year is greater than or equal to the starting year
           // and less than or equal to the ending year...
-          if (startYear <= currentYear && currentYear <= endYear) {
+          //if (startYear <= currentYear && currentYear <= endYear) {
+          if (startYear <= currentYear) {
             // add the layer to the layer group
             eventsPoint.addLayer(layer);
             // if any of these have a name of...
@@ -552,7 +553,8 @@
             }
           } // if the selected year is less than the start year or
           // greater than the end year,
-          if (currentYear < startYear || currentYear > endYear) {
+          //if (currentYear < startYear || currentYear > endYear) {
+          if (currentYear < startYear) {
             // remove the layer from the layer group
             eventsPoint.removeLayer(layer);
             alexanderClarkPoint.removeLayer(layer);
@@ -787,7 +789,8 @@
         var name = layer.feature.properties.Name;
         // If the current year is greater than or equal to the starting year
         // and less than or equal to the ending year...
-        if (startYear <= currentYear && currentYear <= endYear) {
+        //if (startYear <= currentYear && currentYear <= endYear) {
+        if (startYear <= currentYear) {
           // add the layer to the layer group named "eventsPoint"
           eventsPoint.addLayer(layer);
           // if any of these have a name of...
@@ -850,7 +853,8 @@
         var endYear = layer.feature.properties.end_date;
         // if the selected year is less than the start year or
         // greater than the end year,
-        if (currentYear < startYear || currentYear > endYear) {
+        //if (currentYear < startYear || currentYear > endYear) {
+        if (currentYear < startYear) {
           // remove the layer from the layer group
           eventsPoint.removeLayer(layer)
         }
@@ -859,112 +863,128 @@
       alexanderClarkPoint.eachLayer(function(layer) {
         var startYear = layer.feature.properties.start_date;
         var endYear = layer.feature.properties.end_date;
-        if (currentYear < startYear || currentYear > endYear) {
+        //if (currentYear < startYear || currentYear > endYear) {
+        if (currentYear < startYear) {
           alexanderClarkPoint.removeLayer(layer)
         }
       });
       benjaminMathewsPoint.eachLayer(function(layer) {
         var startYear = layer.feature.properties.start_date;
         var endYear = layer.feature.properties.end_date;
-        if (currentYear < startYear || currentYear > endYear) {
+        //if (currentYear < startYear || currentYear > endYear) {
+        if (currentYear < startYear) {
           benjaminMathewsPoint.removeLayer(layer)
         }
       });
       bolingBowserPoint.eachLayer(function(layer) {
         var startYear = layer.feature.properties.start_date;
         var endYear = layer.feature.properties.end_date;
-        if (currentYear < startYear || currentYear > endYear) {
+        //if (currentYear < startYear || currentYear > endYear) {
+        if (currentYear < startYear) {
           bolingBowserPoint.removeLayer(layer)
         }
       });
       catherineClarkPoint.eachLayer(function(layer) {
         var startYear = layer.feature.properties.start_date;
         var endYear = layer.feature.properties.end_date;
-        if (currentYear < startYear || currentYear > endYear) {
+        //if (currentYear < startYear || currentYear > endYear) {
+        if (currentYear < startYear) {
           catherineClarkPoint.removeLayer(layer)
         }
       });
       danielAndersonPoint.eachLayer(function(layer) {
         var startYear = layer.feature.properties.start_date;
         var endYear = layer.feature.properties.end_date;
-        if (currentYear < startYear || currentYear > endYear) {
+        //if (currentYear < startYear || currentYear > endYear) {
+        if (currentYear < startYear) {
           danielAndersonPoint.removeLayer(layer)
         }
       });
       ellenAndersonPoint.eachLayer(function(layer) {
         var startYear = layer.feature.properties.start_date;
         var endYear = layer.feature.properties.end_date;
-        if (currentYear < startYear || currentYear > endYear) {
+        //if (currentYear < startYear || currentYear > endYear) {
+        if (currentYear < startYear) {
           ellenAndersonPoint.removeLayer(layer)
         }
       });
       georgeManlyPoint.eachLayer(function(layer) {
         var startYear = layer.feature.properties.start_date;
         var endYear = layer.feature.properties.end_date;
-        if (currentYear < startYear || currentYear > endYear) {
+        //if (currentYear < startYear || currentYear > endYear) {
+        if (currentYear < startYear) {
           georgeManlyPoint.removeLayer(layer)
         }
       });
       hannahMathewsPoint.eachLayer(function(layer) {
         var startYear = layer.feature.properties.start_date;
         var endYear = layer.feature.properties.end_date;
-        if (currentYear < startYear || currentYear > endYear) {
+        //if (currentYear < startYear || currentYear > endYear) {
+        if (currentYear < startYear) {
           hannahMathewsPoint.removeLayer(layer)
         }
       });
       johnHinerPoint.eachLayer(function(layer) {
         var startYear = layer.feature.properties.start_date;
         var endYear = layer.feature.properties.end_date;
-        if (currentYear < startYear || currentYear > endYear) {
+        //if (currentYear < startYear || currentYear > endYear) {
+        if (currentYear < startYear) {
           johnHinerPoint.removeLayer(layer)
         }
       });
       mahaliaSammonsPoint.eachLayer(function(layer) {
         var startYear = layer.feature.properties.start_date;
         var endYear = layer.feature.properties.end_date;
-        if (currentYear < startYear || currentYear > endYear) {
+        //if (currentYear < startYear || currentYear > endYear) {
+        if (currentYear < startYear) {
           mahaliaSammonsPoint.removeLayer(layer)
         }
       });
       maryJeffersPoint.eachLayer(function(layer) {
         var startYear = layer.feature.properties.start_date;
         var endYear = layer.feature.properties.end_date;
-        if (currentYear < startYear || currentYear > endYear) {
+        //if (currentYear < startYear || currentYear > endYear) {
+        if (currentYear < startYear) {
           maryJeffersPoint.removeLayer(layer)
         }
       });
       minervaTuttPoint.eachLayer(function(layer) {
         var startYear = layer.feature.properties.start_date;
         var endYear = layer.feature.properties.end_date;
-        if (currentYear < startYear || currentYear > endYear) {
+        //if (currentYear < startYear || currentYear > endYear) {
+        if (currentYear < startYear) {
           minervaTuttPoint.removeLayer(layer)
         }
       });
       noahTuttPoint.eachLayer(function(layer) {
         var startYear = layer.feature.properties.start_date;
         var endYear = layer.feature.properties.end_date;
-        if (currentYear < startYear || currentYear > endYear) {
+        //if (currentYear < startYear || currentYear > endYear) {
+        if (currentYear < startYear) {
           noahTuttPoint.removeLayer(layer)
         }
       });
       rebeccaDarnesPoint.eachLayer(function(layer) {
         var startYear = layer.feature.properties.start_date;
         var endYear = layer.feature.properties.end_date;
-        if (currentYear < startYear || currentYear > endYear) {
+        //if (currentYear < startYear || currentYear > endYear) {
+        if (currentYear < startYear) {
           rebeccaDarnesPoint.removeLayer(layer)
         }
       });
       susanHollyPoint.eachLayer(function(layer) {
         var startYear = layer.feature.properties.start_date;
         var endYear = layer.feature.properties.end_date;
-        if (currentYear < startYear || currentYear > endYear) {
+        //if (currentYear < startYear || currentYear > endYear) {
+        if (currentYear < startYear) {
           susanHollyPoint.removeLayer(layer)
         }
       });
       thomasMottsPoint.eachLayer(function(layer) {
         var startYear = layer.feature.properties.start_date;
         var endYear = layer.feature.properties.end_date;
-        if (currentYear < startYear || currentYear > endYear) {
+        //if (currentYear < startYear || currentYear > endYear) {
+        if (currentYear < startYear) {
           thomasMottsPoint.removeLayer(layer)
         }
       });
