@@ -211,6 +211,11 @@
       border-right-color: rgba(236, 236, 220, 1.0);
     }
 
+    .leaflet-tooltip{
+      width: 250px;
+      white-space: normal;
+    }
+
   </style>
 
 </head>
@@ -436,8 +441,8 @@
     };
 
     // use D3 fetch to request data with async requests
-    const lifeData = d3.json('data/life_points_1857.geojson');
-    const migrationArrows = d3.json('data/flowmap_lines_1857.geojson');
+    const lifeData = d3.json('data/life_points_1857_revised.geojson');
+    const migrationArrows = d3.json('data/flowmap_lines_1857_revised.geojson');
 
     // use Promise to wait until data is all loaded
     Promise.all([lifeData, migrationArrows]).then(drawMap);
@@ -479,7 +484,7 @@
           var props = layer.feature.properties;
 
           // bind info to the layer features using popups
-          layer.bindPopup("<h4 class=txt-bold>" + props.Name + ", " + props.location + ", " + props.range_date + "</h4><h4>Information:</h4>" + "<h5>" + props.info + "</h5><h4>Description:</h4>" + "<h5>" + props.description + "</h5>", {
+          layer.bindPopup("<h4 class=txt-bold>" + props.Name + ", " + props.location + ", " + props.range_date + "</h4><h4>Biographical Information:</h4>" + "<h5>" + props.biographical + "</h5>", {
             closeButton: false
           });
           layer.on('mouseover', function() { // On mouseover...
@@ -598,7 +603,7 @@
           // define the layer feature properties
           var props = layer.feature.properties;
           // bind info to the layer features using popups
-          layer.bindTooltip(props.Name + ", " + props.year + "<hr>Traveled from " + props.s_city + " to " + props.e_city, {className: 'myCSSClass'});
+          layer.bindTooltip(props.Name + ", " + props.year + "<hr>" + props.n_migration, {className: 'myCSSClass'});
           layer.on('mouseover', function() { // On mouseover...
             // reset the line style
             layer.setStyle({

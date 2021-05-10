@@ -1,0 +1,50 @@
+Name,s_city,e_city,free,s_lon,s_lat,e_lon,e_lat,year,s_city_id,e_city_id,migration
+Alexander Clark,"Washington, PA","Cincinnati, OH",yes,-80.250556,40.175,-84.516667,39.1,1840,1,49,"Migrates in 1840 to Cincinnati, OH, to apprentice under uncle, a barber, and attend school."
+Alexander Clark,"Cincinnati, OH",Mississippi River,yes,-84.516667,39.1,-90.179304,38.626849,1841,2,48,Works on a river steamboat on the Mississippi River between 1841-42.
+Alexander Clark,Mississippi River,"Muscatine, IA",yes,-90.179304,38.626849,-91.056111,41.423889,1842,3,47,Moves to Muscatine to become a barber and entrepreneur.
+Alexander Clark,"Muscatine, IA",Chicago,yes,-91.056111,41.423889,-87.627778,41.881944,1884,4,46,Purchases the Chicago Conservator and moves to Chicago to edit the paper between 1884-1890.
+Alexander Clark,Chicago,"Monrovia, Liberia",yes,-87.627778,41.881944,-10.801389,6.313333,1890,5,45,Moves to Liberia to serve as the U.S. Minister in 1890 before dying a year later in 1891. Clark's body was returned to Muscatine for burial.
+Catherine Griffin Clark,"Middlebourne, Tyler County, VA (now WVA)","Windsor, Morgan Co., OH",no,-80.907644,39.494178,-81.7790227,39.5672946,1825,6,44,"At three years old, Clark is brought by Rachel Cheadle to Ohio in 1825. Remained enslaved by the Cheadles in Ohio."
+Catherine Griffin Clark,"Windsor, Morgan Co., OH","Marion, Linn Co., IA",no,-81.7790227,39.5672946,-91.5973995,42.0333325,1842,7,43,"Migrates with the Cheadle household to Marion, Iowa in 1842. "
+Catherine Griffin Clark,"Marion, Linn Co., IA","Iowa City, Iowa",no,-91.5973995,42.0333325,-91.530167,41.661129,1843,8,42,"Moves to Iowa City to work for E. C. Lyon, Esq., although the Cheadles maintain her enslaved status."
+Catherine Griffin Clark,"Iowa City, Iowa","Muscatine, Muscatine Co., Iowa",no,-91.530167,41.661129,-91.06984,41.420129,1848,9,41,"Still formally enslaved by the Cheadles, Catherine Clark marries Alexander Clark and moves to his Muscatine home in 1848. Resides in Muscatine until death in 1879."
+Catherine Griffin Clark,"Muscatine, Muscatine Co., Iowa","Muscatine, Muscatine Co., Iowa",yes,-91.06984,41.420129,-91.0698,41.42013,1851,10,40,Resides in Muscatine until death in 1879. 
+Rebecca Darnes Clark Howard,"Washington, Pennsylvania","Muscatine, Iowa",yes,-80.24617,40.17396,-91.0698,41.42013,1863,11,39,Moves to Muscatine to live with son Alexander Clark.
+Rebecca Darnes Clark Howard,"Muscatine, Iowa","Iowa City, Iowa",yes,-91.0698,41.42013,-91.5302,41.66113,1865,12,38,"Moves to Iowa City to live with second husband John Howard, delegate to the 1868 convention in Des Moines. "
+Rebecca Darnes Clark Howard,"Iowa City, Iowa","Keokuk, Iowa",yes,-91.5302,41.66113,-91.38999,40.40149,1887,13,37,"Dies at the home of her grandaughter, Susan Clark Holly."
+Susan V. Clark Holly,"Muscatine, Iowa","Champaign, Illinois",yes,-91.0698,41.42013,-88.2433,40.1164,1877,14,36,"Moves to Champaign with her husband, Richard Holly, as he fulfills his station on the AME circuit."
+Susan V. Clark Holly,"Champaign, Illinois","Davenport, Iowa",yes,-88.2433,40.1164,-90.5908,41.543,1880,15,35,Moves to Davenport with husband as he fulfills his station on the AME circuit. 
+Susan V. Clark Holly,"Davenport, Iowa","Keokuk, Iowa",yes,-90.5908,41.543,-91.3899,40.40149,1887,16,34,"Moves to Keokuk with her husband as he fulfills his station on the AME circuit. Her grandmother, Rebecca Clark, lives with them."
+Susan V. Clark Holly,"Keokuk, Iowa",Cedar Rapids,yes,-91.3899,40.40149,-91.6656,41.9778,1887,17,33,Moves to Cedar Rapids with her husband as he fills his post on the AME circuit.
+Susan V. Clark Holly,Cedar Rapids,"Waterloo, Iowa",yes,-91.6656,41.9778,-92.34099,42.4888,1901,18,32,Moves to Waterloo with her husband as he fills his AME post.
+Susan V. Clark Holly,"Waterloo, Iowa","Chicago, Illinois",yes,-92.34099,42.4888,-87.6231,41.8818,1925,19,31,Dies at the Chicago home of her niece.
+Daniel Anderson,"Frederick, Frederick Co., MD","Muscatine, Muscatine Co., IA",yes,-77.4255,39.41233,-91.0698,41.42013,1840,20,30,Migrates with thirteen Anderson family members and his wife's former enslavers. Dies in 1856.
+Ellen Anderson nee Mathews,"Frederick, Frederick CO., MD","Frederick, Frederick CO., MD",yes,-77.425461,39.412327,-77.4255,39.41233,1812,21,29,"Moves with three members of her former enslavers' family and her husband and children to Muscatine, Iowa."
+Ellen Anderson nee Mathews,"Frederick, Frederick CO., MD","Muscatine, Muscatine Co., IA",yes,-77.4255,39.41233,-91.0698,41.42013,1840,22,28,First resides with David R. Warfield; then marries Daniel Anderson and by 1850 resides with Daniel in their own household. She dies in Muscatine in 1883.
+Boling Bowser,Ohio,"Mt. Pleasant, Henry Co., IA",yes,-82.9071,40.4173,-91.546549,40.9630851,1855,23,27,"Migrates with his wife, son, and a friend to Mt. Pleasant, Iowa. "
+Boling Bowser,"Mt. Pleasant, Henry Co., IA","Cape Palmas, Liberia",yes,-91.546549,40.9630851,-7.716944,4.37611,1860,24,26,Migrates to Liberia with the assistance of the American Colonization Society.
+Benjamin Mathews,"Frederick, Maryland","Frederick, Maryland",yes,-77.412758,39.433086,-77.4128,39.43309,1812,25,25,Benjamin is manumitted but continues to live on the A. O. Warfield plantation.
+Benjamin Mathews,"Frederick, Maryland",Southern Illinois,yes,-77.4128,39.43309,-89.2226,37.71,1838,26,24,Accompanies three Warfield men to southern Illinois. 
+Benjamin Mathews,Southern Illinois,"Muscatine, Iowa",yes,-89.2226,37.71,-91.0698,41.42013,1839,27,23,"Moves to the Warfield household in Muscatine, IA and is joined by wife, children, and extended family."
+Hannah Virginia Mathews,"Burlington, VT","Muscatine, IA",yes,-73.170969,44.46699,-91.0698,41.42013,1847,28,22,Migrates to Muscatine and lives with her husband there until her death in 1879.
+George Manly,Virginia,"Muscatine, Iowa",yes,-78.6569,37.4316,-91.0698,41.42012,1848,29,21,Migrates to Muscatine by 1848 and lives there until his death in 1891.
+Noah Tutt,"Millersburg, Bourbon County, Kentucky","Akron, Ohio",yes,-84.1474,38.302,-81.519,41.0814,1832,30,20,Migrates with father and family.
+Noah Tutt,"Akron, Ohio","Muscatine, Iowa",yes,-81.519,41.0814,-91.0698,41.42012,1853,31,19,"Migrates to Muscatine, where he resides until his death in 1918."
+Minerva A. Barkshire Tutt,"Boone County, Kentucky","Rising Sun, Indiana",no,-84.7316,38.9941,-84.8538,38.9495,1836,32,18,Accompanies her family members and the widow of her enslaver.
+Minerva A. Barkshire Tutt,"Rising Sun, Indiana","Muscatine, Iowa",yes,-84.8538,38.9495,-91.0698,41.42012,1856,33,17,"Migrates with her husband, Noah Tutt."
+Thomas Cook Motts,"Sharpsburg, Maryland",Ohio River,yes,-77.7489,39.4576,-84.746884,39.145793,1838,34,16,Works as a deckhand on the Ohio River.
+Thomas Cook Motts,Ohio River deckhand,"Muscatine, Iowa",yes,-84.746884,39.145793,-91.0698,41.42012,1840,35,15,Migrates to Muscatine and remarries two times.
+Mahalia Sammons Motts,"Nantocoke, Delaware","Louisa County, Iowa",yes,-75.6096,38.6401,-91.255998,41.21749913,1836,36,14,Migrates with family of origin and two additional families of mixed-race people.
+Mahalia Sammons Motts,"Louisa County, Iowa","Muscatine, Iowa",yes,-91.255998,41.21749913,-91.0698,41.42012,1848,37,13,Moves to Muscatine with her husband and stays there until his death in 1866.
+Mahalia Sammons Motts Lindsey,"Muscatine, Iowa",Washington Iowa,yes,-91.0698,41.42012,-93.1535391,41.2033315,1866,38,12,"Remarries and moves to Washington, IA in 1866, where she resides until her 1898 death."
+John Hiner,"Baltimore, MD","Pittsburgh, PA",yes,-76.609383,39.299236,-79.995888,40.440624,1834,39,11,Travels west to Pittsburgh at age 22.
+John Hiner,"Pittsburgh, PA","Louisville, KY",yes,-79.995888,40.440624,-85.764771,38.328732,1837,40,10,Moves to Kentucky for an unspecified amount of time. 
+John Hiner,"Louisville, KY",Yellowstone,yes,-85.764771,38.328732,-110.5,44.6,1840,41,9,Moves to the Yellowstone area for an unspecified time period. 
+John Hiner,Yellowstone,"Keokuk, IA",yes,-110.5,44.6,-91.3899,40.40149839,1842,42,8,Moves to Keokuk to establish butchering business and enters a common-law marriage with a woman named Harriet. 
+John Hiner,"Keokuk, IA",San Francisco,yes,-91.3899,40.40149839,-122.416389,37.7775,1852,43,7,Migrates across California after an unsuccessful stint in the Gold Rush.
+John Hiner,San Francisco,"Keokuk, IA",yes,-122.416389,37.7775,-91.3899,40.4015,1855,44,6,Returns to Keokuk to expand sucessful slaughterhouse and butchering business.
+John Hiner,"Keokuk, IA","Petersburg,  Virginia",yes,-91.3899,40.4015,-77.400417,37.21295,1873,45,5,Migrates with Mary to her family's residence sometime after 1873.
+John Hiner,"Petersburg,  Virginia","Keokuk, IA",yes,-77.400417,37.21295,-91.3899,40.4015,1886,46,4,Returns to Keokuk in 1886 and dies shortly thereafter. Buried in Keokuk. 
+Mary A. Jeffers Cowan Hiner,"Petersburg, VA","San Francisco, CA",yes,-77.401924,37.227928,-122.431297,37.773972,1853,47,3,"Moves to San Francisco to run a boarding house, also meets and marries John Hiner."
+Mary A. Jeffers Cowan Hiner,"San Francisco, CA","Keokuk, IA",yes,-122.431297,37.773972,-91.38999,40.40149,1855,48,2,Moves to Keokuk with John Hiner.
+Mary A. Jeffers Cowan Hiner,"Keokuk, IA","Petersburg, VA",yes,-91.38999,40.40149,-77.4019,37.22793,1873,49,1,Returns to Petersburg and lives with her family of origin until her death in 1886. 
